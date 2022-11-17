@@ -1,19 +1,19 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
+  validates :image, presence: true
   validates :title,            presence: true
-  validates :price,            presence: true
+  validates :price,            presence: true,
+              numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   validates :explanation,      presence: true
-  # validates :shipping_cost_id, presence: true
-  # validates :category_id,      presence: true
-  # validates :status_id,        presence: true
-  # validates :place_id,         presence: true
-  # validates :days_to_ship_id,  presence: true
-  
-  validates :shipping_cost_id, numericality: { other_than: 1 }
-  validates :category_id,      numericality: { other_than: 1 }
-  validates :status_id,        numericality: { other_than: 1 }
-  validates :place_id,         numericality: { other_than: 1 }
-  validates :days_to_ship_id,  numericality: { other_than: 1 }
+
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
+    validates :shipping_cost_id
+    validates :category_id
+    validates :status_id
+    validates :place_id
+    validates :days_to_ship_id
+  end
   
   belongs_to :user
   belongs_to :shipping_cost
@@ -21,4 +21,5 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :place
   belongs_to :days_to_ship
+  has_one_attached :image
 end
