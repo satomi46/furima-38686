@@ -2,9 +2,9 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   validates :image, presence: true
-  validates :title,            presence: true
-  validates :price,            presence: true,
-              numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  validates :title, presence: true
+  validates :price, presence: true,
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   validates :explanation,      presence: true
 
   with_options numericality: { other_than: 1, message: "can't be blank" } do
@@ -14,7 +14,7 @@ class Item < ApplicationRecord
     validates :place_id
     validates :days_to_ship_id
   end
-  
+
   belongs_to :user
   belongs_to :shipping_cost
   belongs_to :category

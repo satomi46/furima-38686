@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :item do
     title              { Faker::Team.name }
-    price              { Faker::Number.between(from: 300, to: 9999999) }
+    price              { Faker::Number.between(from: 300, to: 9_999_999) }
     explanation        { Faker::Lorem.sentence }
     shipping_cost_id   { Faker::Number.between(from: 2, to: 3) }
     category_id        { Faker::Number.between(from: 2, to: 11) }
