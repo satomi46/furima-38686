@@ -1,5 +1,4 @@
 function post () {
-  console.log("イベント発火")
 
   const price_breakdown = document.getElementById("item-price")
   price_breakdown.addEventListener("input", function(){
@@ -8,11 +7,8 @@ function post () {
     const tax_price = Math.floor(tax_price_with_decimal).toLocaleString();
     const margin_with_decimal = total_price * 0.9
     const margin = Math.floor(margin_with_decimal).toLocaleString();
-
     const add_tax_price = document.getElementById("add-tax-price")
     const profit = document.getElementById("profit")
-    // console.log(total_price)
-    // console.log(sales_fee, sales_margin)
     add_tax_price.innerHTML = tax_price + " "
     profit.innerHTML = margin + " "
   });

@@ -50,6 +50,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
+      it 'priceが整数でないとできない' do
+        @item.price = 1000.1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price must be an integer')
+      end
+
       it 'explanationが空だとできない' do
         @item.explanation = ''
         @item.valid?
