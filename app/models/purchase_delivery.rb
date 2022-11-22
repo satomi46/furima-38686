@@ -2,7 +2,7 @@ class PurchaseDelivery
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postcode, :place_id, :city, :address, :building, :phone_number
+  attr_accessor :user_id, :item_id, :postcode, :place_id, :city, :address, :building, :phone_number, :token, :price
 
   with_options presence: true do
     validates :user_id
@@ -12,6 +12,8 @@ class PurchaseDelivery
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A0\d{9,10}\z/ }
+    validates :token
+    validates :price
   end
 
   def save
