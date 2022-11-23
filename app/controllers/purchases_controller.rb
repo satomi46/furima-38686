@@ -20,6 +20,7 @@ class PurchasesController < ApplicationController
   end
 
   private
+
   def purchase_params
     params.require(:purchase_delivery).permit(:postcode, :place_id, :city, :address, :building, :phone_number)
           .merge(item_id: params[:item_id], user_id: current_user.id, price: @item.price, token: params[:token])
@@ -36,8 +37,7 @@ class PurchasesController < ApplicationController
 
   def move_to_index
     unless user_signed_in? && current_user.id != Item.find(params[:item_id]).user_id && Purchase.where(item_id: params[:item_id]).empty?
-    redirect_to root_path
+      redirect_to root_path
     end
   end
-
 end

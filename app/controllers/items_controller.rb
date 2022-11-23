@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
     unless user_signed_in? && current_user.id == Item.find(params[:id]).user_id && Purchase.where(item_id: params[:id]).empty?
-      redirect_to root_path 
+      redirect_to root_path
     end
   end
 end
