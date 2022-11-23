@@ -1,10 +1,12 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: :new
+  before_action :move_to_index, only: :new
 
   def new
     @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new
   end
-  
+
   def create
     @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new(purchase_params)
@@ -31,4 +33,11 @@ class PurchasesController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def move_to_index
+    unless user_signed_in? && current_user.id != Item.find(params[:item_id]).user_id && Purchase.where(item_id: params[:item_id]).empty?
+    redirect_to root_path
+    end
+  end
+
 end
