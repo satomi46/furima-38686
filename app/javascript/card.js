@@ -28,7 +28,6 @@ const pay = () => {
       document.getElementById("card-exp-year").removeAttribute("name");
 
     const price = document.getElementsByClassName("item-price-text")
-    // console.log(price)
       document.getElementById("charge-form").submit();
     });
   });

@@ -42,12 +42,11 @@ RSpec.describe PurchaseDelivery, type: :model do
       it 'postcodeが「3桁-4桁」の半角文字列でないとできない(全角)' do
         @purchase_delivery.postcode = '１２３-４５６７'
         @purchase_delivery.valid?
-        # binding.pry
         expect(@purchase_delivery.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
 
-      it 'place_idが空だとできない' do
-        @purchase_delivery.place_id = ''
+      it 'place_idが1だとできない' do
+        @purchase_delivery.place_id = 1
         @purchase_delivery.valid?
         expect(@purchase_delivery.errors.full_messages).to include("Place can't be blank")
       end

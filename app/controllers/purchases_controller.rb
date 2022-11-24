@@ -1,14 +1,13 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: :new
   before_action :move_to_index, only: :new
+  before_action :set_item, only: [:new, :create]
 
   def new
-    @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_delivery = PurchaseDelivery.new(purchase_params)
     if @purchase_delivery.valid?
       pay_item
@@ -20,6 +19,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_params
     params.require(:purchase_delivery).permit(:postcode, :place_id, :city, :address, :building, :phone_number)
