@@ -72,19 +72,19 @@ RSpec.describe PurchaseDelivery, type: :model do
       it 'phone_numberが10桁以上11桁以内の半角数値でないとできない(10桁未満)' do
         @purchase_delivery.phone_number = 123_456_789
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
 
-      it 'phone_numberが10桁以上11桁以内の半角数値でないとできない(11桁以上)' do
-        @purchase_delivery.phone_number = 12_345_678_901
+      it 'phone_numberが10桁以上11桁以内の半角数値でないとできない(12桁以上)' do
+        @purchase_delivery.phone_number = 123_456_789_012
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
 
       it 'phone_numberが10桁以上11桁以内の半角数値でないとできない(全角)' do
         @purchase_delivery.phone_number = '１２３４５６７８９０'
         @purchase_delivery.valid?
-        expect(@purchase_delivery.errors.full_messages).to include('Phone number is invalid')
+        expect(@purchase_delivery.errors.full_messages).to include('Phone number is not a number')
       end
 
       it 'tokenが空だとできない' do
